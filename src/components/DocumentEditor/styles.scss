@@ -1,0 +1,12 @@
+.top-error {
+  top: -12px;
+  right: 0;
+
+  & .errors-formik .error-container {
+    bottom: 36px !important;
+  }
+
+  & .keep-background {
+    padding: 0 !important;
+  }
+}

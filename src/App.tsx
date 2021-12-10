@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { DocumentEditor } from "./components/DocumentEditor";
+import { Formik, Form } from "formik";
 
 function App() {
+  const campo = {
+    name: "document",
+    label: "Editor",
+    validation: {
+      required: true,
+    },
+    size: 12,
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Formik
+      initialValues={{ document: "" }}
+      onSubmit={(values) => console.log(values)}
+    >
+      {(formik) => (
+        <Form style={{ height: "100vh" }}>
+          <DocumentEditor
+            config={campo}
+            setFormikValue={(fieldName: string, value: any) =>
+              formik.setFieldValue(fieldName, value)
+            }
+            value={formik.values.document}
+            errors={formik.errors.document}
+            touched={formik.touched.document}
+            setFieldTouched={formik.setFieldTouched}
+          />
+        </Form>
+      )}
+    </Formik>
   );
 }
 
